@@ -5,41 +5,29 @@ namespace AvaloniaApplication2.ViewModels
 {
     public partial class MainWindowViewModel : ViewModelBase
     {
-        private string _name = "";
-        private string _message = "";
+        private ViewModelBase _currentPage;
 
-        public string Name
+        public ViewModelBase CurrentPage 
         {
-            get => _name;
-            set 
-            {
-                this.RaiseAndSetIfChanged(ref _name, value);
-                this.RaisePropertyChanged(nameof(Greeting));
-            } 
+            get => _currentPage;
+            set => this.RaiseAndSetIfChanged(ref _currentPage, value);
         }
 
-        public string Message
-        {
-            get => _message;
-            set => this.RaiseAndSetIfChanged(ref _message, value);
-        }
-
-        public string Greeting => string.IsNullOrEmpty(_name)
-            ? "Name unknown..."
-            : $"Hello, {_name}!";
-
-        public ReactiveCommand<Unit, Unit> SayHelloCommand { get; }
+        public ReactiveCommand<Unit, Unit> GoToFilesCommand { get;  }
+        public ReactiveCommand<Unit, Unit> GoBackCommand { get;  }
 
         public MainWindowViewModel()
         {
-            var canExecute = this.WhenAnyValue(
-                x => x.Name,
-                name => !string.IsNullOrWhiteSpace(name));
+            _currentPage = new GreetingViewModel();
 
-            SayHelloCommand = ReactiveCommand.Create(() =>
+            GoToFilesCommand = ReactiveCommand.Create(() =>
             {
-                Message = $"{Name}!?";
-            }, canExecute);
+                CurrentPage = new FilesViewModel();
+            });
+            GoBackCommand = ReactiveCommand.Create(() => 
+            {
+                CurrentPage = new GreetingViewModel();
+            });
         }
     }
 }

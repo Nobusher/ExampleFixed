@@ -1,0 +1,15 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewmodels="using:AvaloniaApplication2.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="AvaloniaApplication2.FilesView"
+             x:DataType="viewmodels:FilesViewModel">
+<StackPanel Margin="30" Spacing="16">
+	<TextBlock Text="File manager" 
+               FontSize="18" FontWeight="SemiBold"/>
+    <TextBlock Text="File manager will be here" 
+               FontSize="18" FontWeight="SemiBold"/>
+</StackPanel>
+</UserControl>
